@@ -113,7 +113,3 @@ Mert Evirgen - rhayaden@gmail.com<br><br>
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mert-evirgen-99ba8a271/)
 
 Project Link: [https://github.com/rhayaden/fire-kitchen](https://github.com/rhayaden/fire-kitchen)
-
-```
-
-```
