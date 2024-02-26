@@ -60,11 +60,7 @@ Enter your connection string for SQL Database connection and your Cloudinary inf
 
 ```json
   "ConnectionStrings": {
-<<<<<<< HEAD
     "FireKitchen": "recipes-database-connection-string",
-=======
-    "FireKitchen": "events-database-connection-string",
->>>>>>> f17feb4 (initial frontend commit)
     "FireKitchenAuth": "auth-database-connection-string"
   },
   "Cloudinary": {
