@@ -24,11 +24,8 @@
 
 ## About the Project
 
-<<<<<<< HEAD
 This is a full-stack blog app where you find and share food recipes. I have built this with [React.js](https://react.dev/) and [ASP.NET Web API](https://dotnet.microsoft.com/en-us/apps/aspnet). Unlike my other projects, I have used [React Query](https://tanstack.com/query/latest/docs/framework/react/overview) instead of React Redux this time. Also, I have used [Bootstrap](https://getbootstrap.com/) for styling.
-=======
 This is a full-stack blog app where you find and share food recipes. I have built this with [React.js](https://react.dev/) and [ASP.NET Web API](https://dotnet.microsoft.com/en-us/apps/aspnet). Unlike my other projects, I have used [React Query](https://tanstack.com/query/latest/docs/framework/react/overview) instead of React Redux this time. Also, for styling I have used [Bootstrap](https://getbootstrap.com/).
->>>>>>> f17feb4 (initial frontend commit)
 
 ## Built with
 
