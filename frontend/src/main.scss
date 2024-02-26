@@ -1,0 +1,47 @@
+$primary: #ff9933;
+
+$theme-colors: (
+  "primary": #ff9933,
+  "secondary": #a09992,
+  "success": #33ff99,
+  "info": #3399ff,
+  "warning": #ffff33,
+  "danger": #ff3333,
+  "light": #eaeaea,
+  "dark": #000000,
+);
+
+$border-width: 2px;
+$navbar-light-icon-color: #303030;
+$body-color: #fafafa;
+$body-bg: #303030;
+$focus-ring-width: 0.25rem;
+$focus-ring-opacity: 0.25;
+$focus-ring-color: rgba(#ff9933, $focus-ring-opacity);
+$focus-ring-blur: 0;
+$focus-ring-box-shadow: 0 0 $focus-ring-blur $focus-ring-width $focus-ring-color;
+$input-focus-border-color: #ff9933;
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables-dark";
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "width":
+      map-merge(
+        map-get($utilities, "width"),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+@import "../node_modules/bootstrap/scss/utilities/api";
+
+@import "../node_modules/bootstrap/scss/bootstrap";
