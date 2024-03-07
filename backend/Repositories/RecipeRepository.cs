@@ -33,9 +33,9 @@ namespace Fire_Kitchen.Repositories
             return selectedRecipe;
         }
 
-        public async Task<IEnumerable<Recipe>> GetByAuthorAsync(string author)
+        public async Task<IEnumerable<Recipe>> GetByAuthorIdAsync(string authorId)
         {
-            var authorRecipes = await _db.Recipes.Where(recipe => recipe.Author == author).ToListAsync();
+            var authorRecipes = await _db.Recipes.Where(recipe => recipe.AuthorId == authorId).ToListAsync();
             if (authorRecipes is null)
             {
                 return null;

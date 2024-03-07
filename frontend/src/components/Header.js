@@ -1,9 +1,20 @@
 import logo from "../images/main-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useIsFetching } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export default function Header() {
+  const session = sessionStorage.getItem("session");
   const fetching = useIsFetching();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (JSON.parse(session)?.expires < new Date().toISOString()) {
+      sessionStorage.removeItem("session");
+      navigate(0);
+    }
+  });
+
   const hideMenu = () => {
     window.scrollTo(0, 0);
     if (window.matchMedia("(min-width: 992px)").matches) {
@@ -25,10 +36,10 @@ export default function Header() {
             <i className="fa-brands fa-instagram fa-fw fw-semibold"></i>
           </Link>
           <Link className="nav-link">
-            <i class="fa-brands fa-x-twitter fa-fw fw-semibold"></i>
+            <i className="fa-brands fa-x-twitter fa-fw fw-semibold"></i>
           </Link>
           <Link className="nav-link">
-            <i class="fa-brands fa-square-facebook fa-fw fw-semibold"></i>
+            <i className="fa-brands fa-square-facebook fa-fw fw-semibold"></i>
           </Link>
         </div>
       </div>
@@ -72,16 +83,34 @@ export default function Header() {
                 >
                   <img src={logo} />
                 </Link>
-                <li className="nav-item fw-semibold mx-3" onClick={hideMenu}>
-                  <Link className="nav-link" to="/auth/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item fw-semibold mx-3" onClick={hideMenu}>
-                  <Link className="nav-link" to="/auth/register">
-                    Register
-                  </Link>
-                </li>
+                {!session && (
+                  <li className="nav-item fw-semibold mx-3" onClick={hideMenu}>
+                    <Link className="nav-link" to="/auth/login">
+                      Login
+                    </Link>
+                  </li>
+                )}
+                {!session && (
+                  <li className="nav-item fw-semibold mx-3" onClick={hideMenu}>
+                    <Link className="nav-link" to="/auth/register">
+                      Register
+                    </Link>
+                  </li>
+                )}
+                {session && (
+                  <li className="nav-item fw-semibold mx-3" onClick={hideMenu}>
+                    <Link className="nav-link" to="/my-recipes">
+                      My Recipes
+                    </Link>
+                  </li>
+                )}
+                {session && (
+                  <li className="nav-item fw-semibold mx-3" onClick={hideMenu}>
+                    <Link className="nav-link" to="/logout">
+                      Logout
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

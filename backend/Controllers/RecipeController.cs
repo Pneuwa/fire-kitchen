@@ -34,9 +34,9 @@ namespace Fire_Kitchen.Controllers
         }
         [HttpGet]
         [Route("author")]
-        public async Task<IActionResult> GetByAuthor(string author)
+        public async Task<IActionResult> GetByAuthorId(string authorId)
         {
-            var authorRecipes = await _recipeService.GetByAuthor(author);
+            var authorRecipes = await _recipeService.GetByAuthorId(authorId);
             if (authorRecipes is null)
             {
                 return NotFound();

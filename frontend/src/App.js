@@ -5,10 +5,15 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/auth/Loginpage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import Logout from "./components/auth/Logout";
 import Layout from "./pages/Layout";
 import RecipesPage from "./pages/recipes/RecipesPage";
 import RecipeDetailsPage from "./pages/recipes/RecipesDetailsPage";
+import EditPage from "./pages/recipes/EditPage";
 import SharePage from "./pages/recipes/SharePage";
+import UserRecipesPage from "./pages/recipes/UserRecipesPage";
+import ProtectedAuth from "./util/ProtectedAuth";
+import ProtectedRoute from "./util/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,18 +25,60 @@ const router = createBrowserRouter([
       {
         path: "auth",
         children: [
-          { path: "login", element: <LoginPage /> },
-          { path: "register", element: <RegisterPage /> },
+          {
+            path: "login",
+            element: (
+              <ProtectedAuth>
+                <LoginPage />
+              </ProtectedAuth>
+            ),
+          },
+          {
+            path: "register",
+            element: (
+              <ProtectedAuth>
+                <RegisterPage />
+              </ProtectedAuth>
+            ),
+          },
         ],
+      },
+      {
+        path: "logout",
+        element: (
+          <ProtectedRoute>
+            <Logout />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "recipes",
         element: <RecipesPage />,
       },
+      {
+        path: "my-recipes",
+        element: (
+          <ProtectedRoute>
+            <UserRecipesPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: "recipes/:id", element: <RecipeDetailsPage /> },
       {
+        path: "recipes/:id/edit",
+        element: (
+          <ProtectedRoute>
+            <EditPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "share",
-        element: <SharePage />,
+        element: (
+          <ProtectedRoute>
+            <SharePage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

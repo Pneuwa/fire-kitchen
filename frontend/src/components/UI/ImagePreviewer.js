@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import classes from "../../Custom.module.css";
 
-export default function ImagePreviewer({ imageData }) {
+export default function ImagePreviewer({ imageData, hasError }) {
   const [pickedImage, setPickedImage] = useState(null);
 
   useEffect(() => {
@@ -9,18 +9,18 @@ export default function ImagePreviewer({ imageData }) {
       setPickedImage(null);
       return;
     }
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPickedImage(fileReader.result);
-    };
-    fileReader.readAsDataURL(imageData);
+    setPickedImage(imageData);
   }, [imageData]);
 
   return (
-    <div className={classes.preview}>
+    <div
+      className={`${hasError && !imageData ? "border-danger" : ""} ${
+        classes.preview
+      }`}
+    >
       {!pickedImage && <p className="text-muted m-0">No Image</p>}
       {pickedImage && (
-        <img src={pickedImage} className="img-fluid object-fit-cover" />
+        <img src={pickedImage} className="img-fluid object-fit-cover h-100" />
       )}
     </div>
   );

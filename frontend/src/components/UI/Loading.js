@@ -1,4 +1,4 @@
-import classes from "../Custom.module.css";
+import classes from "../../Custom.module.css";
 
 export default function Loading() {
   return (

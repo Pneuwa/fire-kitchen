@@ -1,6 +1,7 @@
 ﻿using Fire_Kitchen.Models.Domain;
 using Fire_Kitchen.Models.DTO;
 using Fire_Kitchen.Repositories;
+using Fire_Kitchen.Utility;
 
 namespace Fire_Kitchen.Services
 {
@@ -29,6 +30,7 @@ namespace Fire_Kitchen.Services
                 Instructions = recipeDTO.Instructions,
                 Ingredients = recipeDTO.Ingredients,
                 Author = recipeDTO.Author,
+                AuthorId = recipeDTO.AuthorId,
                 ImageUrl = recipeDTO.ImageUrl,
             };
             await _recipeRepository.CreateAsync(recipe);
@@ -71,6 +73,7 @@ namespace Fire_Kitchen.Services
                     Ingredients = recipe.Ingredients,
                     Instructions = recipe.Instructions,
                     Author = recipe.Author,
+                    AuthorId = recipe.AuthorId,
                     ImageUrl = recipe.ImageUrl,
                 });
             }
@@ -95,20 +98,21 @@ namespace Fire_Kitchen.Services
                 Ingredients = selectedRecipe.Ingredients,
                 Instructions = selectedRecipe.Instructions,
                 Author = selectedRecipe.Author,
+                AuthorId = selectedRecipe.AuthorId,
                 ImageUrl = selectedRecipe.ImageUrl,
             };
             _response.Data = recipeDTO;
             return _response;
         }
 
-        public async Task<ResponseDTO?> GetByAuthor(string author)
+        public async Task<ResponseDTO?> GetByAuthorId(string authorId)
         {
-            IEnumerable<Recipe> authorRecipes = await _recipeRepository.GetByAuthorAsync(author);
+            IEnumerable<Recipe> authorRecipes = await _recipeRepository.GetByAuthorIdAsync(authorId);
             if(authorRecipes is null)
             {
                 _response.Data = null;
                 _response.Error = true;
-                _response.Message = $"{author} has not any recipes";
+                _response.Message = $"This user has not any recipes";
                 return _response;
             }
             var recipeDTO = new List<RecipeDTO>();
@@ -121,6 +125,7 @@ namespace Fire_Kitchen.Services
                     Ingredients = recipe.Ingredients,
                     Instructions = recipe.Instructions,
                     Author = recipe.Author,
+                    AuthorId = recipe.AuthorId,
                     ImageUrl = recipe.ImageUrl,
                 });
             }
@@ -130,6 +135,13 @@ namespace Fire_Kitchen.Services
 
         public async Task<ResponseDTO?> UpdateById(RecipeDTO recipeDTO)
         {
+            if(CurrentUser.Id != recipeDTO.AuthorId)
+            {
+                _response.Data = null;
+                _response.Error = true;
+                _response.Message = "Not authenticated";
+                return _response;
+            }
             var updatedRecipeModel = new Recipe()
             {
                 Id = recipeDTO.Id,
@@ -137,6 +149,7 @@ namespace Fire_Kitchen.Services
                 Ingredients = recipeDTO.Ingredients,
                 Instructions = recipeDTO.Instructions,
                 Author = recipeDTO.Author,
+                AuthorId = recipeDTO.AuthorId,
                 ImageUrl = recipeDTO.ImageUrl,
             };
             var updatedRecipe = await _recipeRepository.UpdateByIdAsync(updatedRecipeModel);
@@ -154,6 +167,7 @@ namespace Fire_Kitchen.Services
                 Ingredients = updatedRecipe.Ingredients,
                 Instructions = updatedRecipe.Instructions,
                 Author = updatedRecipe.Author,
+                AuthorId = updatedRecipe.AuthorId,
                 ImageUrl = updatedRecipe.ImageUrl,
             };
             _response.Data = updatedRecipeDTO;

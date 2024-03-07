@@ -33,10 +33,10 @@ export default function Footer() {
                     <i className="fa-brands fa-instagram fa-fw fw-semibold"></i>
                   </Link>
                   <Link className="nav-link">
-                    <i class="fa-brands fa-x-twitter fa-fw fw-semibold"></i>
+                    <i className="fa-brands fa-x-twitter fa-fw fw-semibold"></i>
                   </Link>
                   <Link className="nav-link">
-                    <i class="fa-brands fa-square-facebook fa-fw fw-semibold"></i>
+                    <i className="fa-brands fa-square-facebook fa-fw fw-semibold"></i>
                   </Link>
                 </div>
               </li>

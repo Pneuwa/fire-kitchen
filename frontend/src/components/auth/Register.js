@@ -1,13 +1,39 @@
 import classes from "../../Custom.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import orange from "../../images/orange-fruit.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { auth, queryClient } from "../../util/http";
+import Error from "../UI/Error";
 
 export default function Register() {
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const checkRef = useRef();
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: auth,
+    onSuccess: (data) => {
+      if (data.errors.Email) {
+        setHasError(true);
+        setErrorMessage(data.errors.Email[0]);
+        return;
+      }
+      if (data.error) {
+        setHasError(true);
+        setErrorMessage(data.message);
+        return;
+      }
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      navigate("/auth/login");
+    },
+  });
+
   const submitHandler = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,19 +42,31 @@ export default function Register() {
       e.stopPropagation();
     }
 
+    const enteredEmail = emailRef.current.value;
     const enteredFirstName = firstNameRef.current.value;
     const enteredLastName = lastNameRef.current.value;
-    const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
+    const isChecked = checkRef.current.checked;
 
     const data = {
+      email: enteredEmail,
       firstName: enteredFirstName,
       lastName: enteredLastName,
-      email: enteredEmail,
       password: enteredPassword,
     };
 
     form.classList.add("was-validated");
+
+    if (
+      !enteredEmail.includes("@") ||
+      enteredFirstName == "" ||
+      enteredLastName == "" ||
+      enteredPassword == "" ||
+      !isChecked
+    ) {
+      return;
+    }
+    mutate({ path: pathname, body: data });
   };
   return (
     <div
@@ -50,6 +88,7 @@ export default function Register() {
         onSubmit={submitHandler}
         noValidate
       >
+        {hasError && <Error message={errorMessage} />}
         <div className="col-md-6 mb-2">
           <label htmlFor="firstName" className="form-label fw-semibold">
             First Name
@@ -89,7 +128,7 @@ export default function Register() {
             required
           />
         </div>
-        <div class="col-12 mb-2">
+        <div className="col-12 mb-2">
           <label htmlFor="password" className="form-label">
             Password
           </label>
@@ -102,16 +141,17 @@ export default function Register() {
             required
           />
         </div>
-        <div class="col-12 mb-2">
-          <div class="form-check">
+        <div className="col-12 mb-2">
+          <div className="form-check">
             <input
               className="form-check-input"
               type="checkbox"
               id="check"
               name="check"
+              ref={checkRef}
               required
             />
-            <label className="form-check-label" htmlFor="check">
+            <label className="form-check-label fw-semibold" htmlFor="check">
               I agree with Terms of Service
             </label>
           </div>
@@ -125,7 +165,7 @@ export default function Register() {
       <div className={`row ${classes.form}`}>
         <Link
           to="/auth/login"
-          className="nav-link fs-5 fw-semibold text-center"
+          className="nav-link text-light fs-5 fw-semibold text-center"
         >
           Login
         </Link>

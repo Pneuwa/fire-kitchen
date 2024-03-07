@@ -7,7 +7,7 @@ namespace Fire_Kitchen.Repositories
         Task<Recipe> CreateAsync(Recipe recipe);
         Task<IEnumerable<Recipe>> GetAllAsync();
         Task<Recipe?> GetByIdAsync(Guid id);
-        Task<IEnumerable<Recipe>> GetByAuthorAsync(string author);
+        Task<IEnumerable<Recipe>> GetByAuthorIdAsync(string authorId);
         Task<Recipe?> UpdateByIdAsync(Recipe recipe);
         Task<Recipe?> DeleteByIdAsync(Guid id);
     }

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import Loading from "../UI/Loading";
 import RecipeItem from "./RecipeItem";
 import Masonry from "react-masonry-css";
 
-export default function Recipes({ recipes }) {
+export default function Recipes({ recipes, error, isPending, isError }) {
   const [search, setSearch] = useState(false);
   const [searchedRecipes, setSearchedRecipes] = useState([]);
 
@@ -54,22 +55,26 @@ export default function Recipes({ recipes }) {
             Filtered Recipes
           </h1>
         )}
-        <Masonry
-          breakpointCols={{ default: 4, 576: 1, 768: 2, 992: 3 }}
-          className="d-flex"
-          columnClassName="d-flex flex-column p-1"
-        >
-          {(search ? searchedRecipes : recipes).map((recipe) => (
-            <RecipeItem
-              key={recipe.id}
-              id={recipe.id}
-              title={recipe.title}
-              ingredients={recipe.ingredients}
-              author={recipe.author}
-              img={recipe.img}
-            />
-          ))}
-        </Masonry>
+        {error && <p>{error.message}</p>}
+        {isError && <p>{isError}</p>}
+        {isPending && <Loading />}
+        {!error && !isError && !isPending && (
+          <Masonry
+            breakpointCols={{ default: 4, 576: 1, 768: 2, 992: 3 }}
+            className="d-flex"
+            columnClassName="d-flex flex-column p-1"
+          >
+            {(search ? searchedRecipes : recipes).map((recipe) => (
+              <RecipeItem
+                key={recipe.id}
+                id={recipe.id}
+                title={recipe.title}
+                author={recipe.author}
+                imageUrl={recipe.imageUrl}
+              />
+            ))}
+          </Masonry>
+        )}
       </div>
     </div>
   );

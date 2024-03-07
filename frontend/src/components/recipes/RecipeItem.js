@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import classes from "../../Custom.module.css";
 
-export default function RecipeItem({ id, title, author, img }) {
+export default function RecipeItem({ id, title, author, imageUrl }) {
   return (
     <Link
       to={`/recipes/${id}`}
@@ -17,7 +17,7 @@ export default function RecipeItem({ id, title, author, img }) {
     >
       <div className="card bg-dark">
         <div className={classes.recipe}>
-          <img src={img} className="card-img-top img-fluid" />
+          <img src={imageUrl} className="card-img-top img-fluid" />
         </div>
         <div className="card-body">
           <h5 className="card-title">{title}</h5>

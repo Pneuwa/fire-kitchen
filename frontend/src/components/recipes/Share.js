@@ -1,6 +1,6 @@
 import classes from "../../Custom.module.css";
 import hero from "../../images/sergey-kotenev-V6C_1AUqAWw-unsplash.jpg";
-import ShareForm from "./ShareForm";
+import RecipeForm from "./RecipeForm";
 
 export default function Share() {
   return (
@@ -9,7 +9,7 @@ export default function Share() {
       style={{
         backgroundImage: `url(${hero})`,
         backgroundPosition: "center",
-        height: "95dvh",
+        height: "auto",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
@@ -17,7 +17,7 @@ export default function Share() {
       <div className={`row pt-5 mb-0 ${classes.head}`}>
         <h2 className="m-0 mb-5 text-center">Share your favorite recipe!</h2>
       </div>
-      <ShareForm />
+      <RecipeForm />
     </div>
   );
 }

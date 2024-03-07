@@ -41,14 +41,12 @@
 }
 
 .head h2,
-h3 {
+.head h3 {
   font-family: "Merienda";
   text-shadow: -3px -3px 3px #000;
 }
 
-.form label,
-.form input,
-.form button {
+.form label {
   text-shadow: 2px 2px 2px #000;
 }
 
@@ -58,11 +56,6 @@ h3 {
 
 .form button {
   font-family: "Merienda";
-}
-
-.form input:focus,
-.form button:hover {
-  text-shadow: none;
 }
 
 .controls {
@@ -109,4 +102,44 @@ h3 {
   cursor: pointer;
   color: #000;
   background: #eaeaea;
+}
+
+.block,
+.info {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: #ff3333;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block {
+  background-color: rgb(240, 240, 240, 0.8);
+}
+
+.icon {
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  color: #fafafa;
+  background-color: #ff3333;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block h2 {
+  color: inherit;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.block p {
+  margin: 0;
 }
