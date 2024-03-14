@@ -54,6 +54,12 @@ npm install @tanstack/react-query
 npm install bootstrap
 ```
 
+To able to customize Bootstrap and use it, go to `frontend/src` directory in your terminal and write this:
+
+```sass
+sass main.scss main.css
+```
+
 ## Usage
 
 Enter your connection string for SQL Database connection and your Cloudinary information for image upload in `appsettings.json` file.
