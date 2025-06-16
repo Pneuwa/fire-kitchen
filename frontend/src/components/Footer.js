@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="col-12 col-md-6">
             <img src={footerLogo} className="img-fluid" />
             <p className="text-body-secondary my-3 text-center text-md-start">
-              © 2024 Rhayaden
+              © 2024 Raiyader
             </p>
           </div>
           <div className="col-12 col-md-6 d-flex flex-column justify-content-start align-items-center">
@@ -18,7 +18,7 @@ export default function Footer() {
               <li className="nav-item">
                 <Link
                   className="nav-link"
-                  to="https://github.com/rhayaden"
+                  to="https://github.com/Raiyader"
                   target="_blank"
                 >
                   About
