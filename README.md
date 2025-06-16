@@ -117,4 +117,4 @@ SOFTWARE.
 Mert Evirgen - evrgnmert@gmail.com<br><br>
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/evirgenmert/)
 
-Project Link: [https://github.com/rhayaden/fire-kitchen](https://github.com/Raiyader/fire-kitchen)
+Project Link: [https://github.com/Raiyader/fire-kitchen](https://github.com/Raiyader/fire-kitchen)
